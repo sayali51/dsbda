@@ -1,0 +1,58 @@
+ Before running this Scala program, ensure the following are installed: 
+• Java 8 or later (sudo apt install openjdk-11-jdk) 
+• Scala (sudo apt install scala) 
+• Apache Spark (download and extract from 
+https://spark.apache.org/downloads.html)  
+Step 1: Create a Sample Input File 
+mkdir wordcount_input
+
+echo "Apache Spark is fast. Spark is fun to use." >
+wordcount_input/input.txt
+##########
+Step 2: Scala Program 
+import org.apache.spark.sql.SparkSession 
+object SimpleWordCount { 
+def main(args: Array[String]): Unit = { 
+// Create Spark session 
+val spark = SparkSession.builder 
+.appName("Simple Word Count") 
+.master("local[*]") // run locally using all cores 
+.getOrCreate() 
+// Read input file 
+val input = spark.sparkContext.textFile("wordcount_input/input.txt")  
+// Perform Word Count 
+val counts = input 
+.flatMap(line => line.split(" ")) 
+.map(word => (word.toLowerCase().replaceAll("""[\p{Punct}]""", ""), 1)) 
+.reduceByKey(_ + _) 
+// Save result 
+counts.saveAsTextFile("wordcount_output") 
+// Stop Spark 
+spark.stop() 
+} 
+}
+##############
+Step 3: Compile and Run the Program 
+scalac -classpath $SPARK_HOME/jars/* SimpleWordCount.scala
+
+$SPARK_HOME/bin/spark-submit \
+
+--class SimpleWordCount \
+
+-master local [*] \
+
+SimpleWordCount.jar
+
+SSPARK HOME/
+
+bin/spark-submit --class SimpleWordCount --master local [*]
+
+SimpleWordCount.scala
+##########
+Output:
+cat wordcount_output/part-
+ 
+ 
+Step 4: Output 
+ 
+ 

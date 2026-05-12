@@ -1,0 +1,10 @@
+2024-01-01 10:00:01 ERROR DatabaseModule Connection timeout
+2024-01-01 10:00:02 INFO AuthModule User logged in
+2024-01-01 10:00:03 WARN NetworkModule High latency
+2024-01-01 10:00:04 ERROR AuthModule Invalid credentials
+2024-01-01 10:00:05 INFO DatabaseModule Query executed
+2024-01-01 10:00:06 ERROR NetworkModule Packet loss
+2024-01-01 10:00:07 WARN DatabaseModule Slow query
+2024-01-01 10:00:08 INFO AuthModule Session created
+2024-01-01 10:00:09 ERROR DatabaseModule Disk space low
+2024-01-01 10:00:10 ERROR AuthModule Token expired

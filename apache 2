@@ -1,16 +1,18 @@
-from pyspark.sql import SparkSession
-spark = SparkSession.builder.master("local").appName("WordCount").getOrCreate()
-sc = spark.sparkContext
+object WordCount {
+  def main(args: Array[String]): Unit = {
+    val sentence = "Apache Spark is fast. Spark is fun to use."
 
-data = sc.parallelize(["Apache Spark is fast. Spark is fun to use."])
-counts = data.flatMap(lambda line: line.split(" ")) \
-             .map(lambda word: (word.lower().strip(".,!?"), 1)) \
-             .reduceByKey(lambda a, b: a + b)
-
-for word, count in counts.collect():
-    print(f"({word},{count})")
-
-
+    val counts = sentence
+      .split(" ")
+      .map(_.toLowerCase.replaceAll("[.,!?]", ""))
+      .groupBy(identity)
+      .map { case (word, arr) => (word, arr.length) }
+    
+    counts.foreach { case (word, count) =>
+      println(s"($word, $count)")
+    }
+  }
+}
 
 ########################
-colab.research.google.com
+scastie
